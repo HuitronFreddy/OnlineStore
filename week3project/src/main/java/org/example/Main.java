@@ -30,7 +30,7 @@ public class Main {
                 }
 
 
-                isMakingSelection = false;
+                isMakingSelection = false; 
             }
             catch(Exception ex){
 
