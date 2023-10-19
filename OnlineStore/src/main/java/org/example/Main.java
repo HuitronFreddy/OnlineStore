@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         //this is the code for the home screen
         boolean isMakingSelection = true;
         while (isMakingSelection) {
@@ -30,7 +29,7 @@ public class Main {
                 }
 
 
-                isMakingSelection = false; 
+                isMakingSelection = false;
             }
             catch(Exception ex){
 
