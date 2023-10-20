@@ -83,10 +83,10 @@ public class Main {
             Product addProduct = null;
             switch (displayProductOptions) {
                 case 1:
+                    //search or filter method here
                     break;
                 case 2:
                     //add product to cart method
-
                     scanner.nextLine(); // Consume the newline character left after nextInt
                     System.out.println("Enter the name of the product you want to add to the cart:");
                     String userInput = scanner.nextLine();
