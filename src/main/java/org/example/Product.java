@@ -50,6 +50,10 @@ public class Product {
     public void setDepartment(String department) {
         this.department = department;
     }
-
+    // i added this method here cause it will save us time to print out the list-bimal
+    @Override
+    public String toString(){
+        return "Product Name: "+productName+"\n"+"price: "+price+"\n"+"Department: "+department+"\n";
+    }
 
 }
