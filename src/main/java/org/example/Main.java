@@ -43,9 +43,11 @@ public class Main {
 
                 switch(homeScanner){
                     case 1:
+                        displayProduct(inventoryList, cartItems);
                         //displayProducts here
                         break;
                     case 2:
+                        displayCart(inventoryList);
                         //displayCart here
                         break;
                     case 3:
@@ -66,9 +68,57 @@ public class Main {
         
     }
     //Freddy's method i just created this so i wont be confused while making mine you can delete this or write on this-Bimal
-    public static void displayProduct(ArrayList<Product> inventory) {
+    public static void displayProduct(ArrayList<Product> inventory, ArrayList<Product> cartItems) {
         for (Product list : inventory) {
             System.out.println(list);
+        }
+        Scanner scanner = new Scanner(System.in);
+        boolean isMakingSelection = true;
+        while (isMakingSelection) {
+            for (Product list : inventory) {
+                System.out.println(list);
+            }
+            System.out.println("Please enter a number \n 1> Search or Filter \n 2> Add product to cart \n 3> Go Back to the home Screen");
+            int displayProductOptions = scanner.nextInt();
+            Product addProduct = null;
+            switch (displayProductOptions) {
+                case 1:
+                    break;
+                case 2:
+                    //add product to cart method
+
+                    scanner.nextLine(); // Consume the newline character left after nextInt
+                    System.out.println("Enter the name of the product you want to add to the cart:");
+                    String userInput = scanner.nextLine();
+                    boolean productFound = false;
+
+                    for (Product product : inventory) {
+                        if (product != null && product.getProductName().equalsIgnoreCase(userInput)) {
+                            System.out.println("\nHere is the product matching the information given:");
+                            System.out.println(product);
+                            System.out.println("1> Add item to cart\n2> Main menu");
+                            productFound = true;
+                            break; // Exit the loop after finding a matching product
+                        }
+                    }
+                    if (!productFound) {
+                        System.out.println("Product not found in the inventory.");
+                    } else {
+                        int choice = scanner.nextInt();
+                        if (choice == 1) {
+                            cartItems.add(addProduct); // Add the product to the cart
+                            System.out.println("Product added to the cart. \n");
+                        }
+                        else{
+                            System.out.println("You are returning to the main menu.");
+                            return;
+                        }
+                    }
+                    break;
+                case 3:
+                    System.out.println("You are returning to the main menu.");
+                    return;
+            }
         }
     }
     //method for display cart - bimal
