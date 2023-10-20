@@ -67,7 +67,7 @@ public class Main {
         }
         
     }
-    //Freddy's method i just created this so i wont be confused while making mine you can delete this or write on this-Bimal
+    //Display Product Method
     public static void displayProduct(ArrayList<Product> inventory, ArrayList<Product> cartItems) {
         for (Product list : inventory) {
             System.out.println(list);
