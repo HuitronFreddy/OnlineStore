@@ -87,12 +87,13 @@ public class Main {
                     break;
                 case 2:
                     //add product to cart method
-                    scanner.nextLine(); // Consume the newline character left after nextInt
+                    scanner.nextLine(); 
                     System.out.println("Enter the name of the product you want to add to the cart:");
                     String userInput = scanner.nextLine();
-                    boolean productFound = false;
+                    boolean productFound = false; //setting product found variable will change to true if userInput matches product by using if statement 
 
                     for (Product product : inventory) {
+                        //if userInput matches a product, display information and prompt next set of questions
                         if (product != null && product.getProductName().equalsIgnoreCase(userInput)) {
                             System.out.println("\nHere is the product matching the information given:");
                             System.out.println(product);
