@@ -54,16 +54,12 @@ public class Main {
                         System.exit(0);
                         break;
                 }
-
-
                 isMakingSelection = false;
             }
             catch(Exception ex){
 
                 System.out.println("Please enter a valid choice.");
             }
-
-
         }
         
     }
