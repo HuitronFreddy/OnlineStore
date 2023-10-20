@@ -12,21 +12,20 @@ public class Main {
         // i wasnt sure whos creating the arraylist for items so ij= just made it- bimal
         ArrayList<Product> inventoryList = new ArrayList<>();
         ArrayList<Product> cartItems = new ArrayList<>();
-        try{
+        try {
             FileInputStream fis = new FileInputStream("src/main/resources/products.csv");
 
             Scanner scanner = new Scanner(fis);
             scanner.nextLine();//this will skip the next line
-            while(scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                String [] inventory = line.split("\\|");
-                Product newInventoryList = new Product(inventory[0],inventory[1],Double.parseDouble(inventory[2]),inventory[3]);
+                String[] inventory = line.split("\\|");
+                Product newInventoryList = new Product(inventory[0], inventory[1], Double.parseDouble(inventory[2]), inventory[3]);
                 inventoryList.add(newInventoryList);
             }
 
 
-        }
-        catch (FileNotFoundException exe){
+        } catch (FileNotFoundException exe) {
             System.out.println("your file is not there");
         }
         //this is the code for the home screen
@@ -41,7 +40,7 @@ public class Main {
                 Scanner scanner = new Scanner(System.in);
                 int homeScanner = scanner.nextInt();
 
-                switch(homeScanner){
+                switch (homeScanner) {
                     case 1:
                         //displayProducts here
                         break;
@@ -55,51 +54,78 @@ public class Main {
 
 
                 isMakingSelection = false;
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
 
                 System.out.println("Please enter a valid choice.");
             }
 
 
         }
-        
+
     }
+
     //Freddy's method i just created this so i wont be confused while making mine you can delete this or write on this-Bimal
     public static void displayProduct(ArrayList<Product> inventory) {
         for (Product list : inventory) {
             System.out.println(list);
         }
     }
+
     //method for display cart - bimal
     public static void displayCart(ArrayList<Product> cartItem) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter \n 1> Check Out \n 2> Remove Product from the cart \n 3> Go Back to the home Screen");
-        int userInput = scanner.nextInt();
-        switch (userInput) {
-            case 1:
-                double sum = 0;
-                for (Product items : cartItem) {
-                    sum += items.getPrice();
-                }
-                System.out.println("Total Amount: " + sum);
-                cartItem.clear();
-                break;
-            case 2:
-                String userItemName = scanner.nextLine();
-                for (Product items : cartItem) {
-                    if (userItemName.equalsIgnoreCase(items.getProductName())) {
-                        System.out.println("Removing " + items.getProductName() + " from the cart");
-                        cartItem.remove(items);
-                    }
+        if (cartItem.isEmpty()) {
+            System.out.println("you don't have any items to be displayed");
+            return;
+        } else {
+            while (true) {
+                System.out.println("Enter \n 1> Check Out \n 2> Remove Product from the cart \n 3> Go Back to the home Screen");
+                int userInput = scanner.nextInt();
 
+
+                switch (userInput) {
+                    case 1:
+                        double sum = 0;
+                        for (Product items : cartItem) {
+                            System.out.println(items);
+                            sum += items.getPrice();
+                        }
+                        System.out.println("Total Amount: " + sum);
+                        cartItem.clear();
+                        System.exit(0);
+                        break;
+                    case 2:
+                        Scanner cartScanner = new Scanner(System.in);
+                        boolean isValid = false;
+                        while (!isValid) {
+                            System.out.println("Enter the product name you want to remove or exit to display cart");
+                            String userItemName = cartScanner.nextLine();
+                            for (Product items : cartItem) {
+                                if (userItemName.equalsIgnoreCase(items.getProductName())) {
+                                    System.out.println("Removing " + items.getProductName() + " from the cart");
+                                    cartItem.remove(items);
+                                    isValid = true;
+                                    break;
+                                }
+
+                            }
+
+                            if (userItemName.equalsIgnoreCase("exit")) {
+                                System.out.println("you are returning to the cart menu");
+                                isValid = true;
+                            }
+                            if (!isValid) {
+                                System.out.println("Your item name is not there enter the correct item");
+                            }
+                        }
+                        break;
+                    case 3:
+                        System.out.println("You are returning to the main menu.");
+                        return;
                 }
-                System.out.println("Your item name is not there enter the correct item");
-                break;
-            case 3:
-                System.out.println("You are returning to the main menu.");
-                return;
+            }
         }
+
     }
 }
